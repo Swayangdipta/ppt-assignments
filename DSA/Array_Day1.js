@@ -31,7 +31,10 @@ const findTarget = (nums,target) => {
 console.log(findTarget([2,7,11,15],9))
 
 // Q2. Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
-// 
+// Approach: FIrst we need a variable to keep count of the non matching values (count or k). Then we loop and check the values and replace the elements
+// in the array using the count varibale and increment the count variable.Finally return the count variable value.
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 
 
 const removeOccurances = (nums, val) => {
