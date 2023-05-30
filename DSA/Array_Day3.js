@@ -1,3 +1,40 @@
+/* Question 1
+Given an integer array nums of length n and an integer target, find three integers
+in nums such that the sum is closest to the target.
+Return the sum of the three integers.
+*/
+// Time Complexity: O(n^2)
+// Space COmplexity: O(1)
+
+const findClosestSum = (nums,target) => {
+    let closestSum = Infinity
+
+    nums.sort((a,b) => a - b)
+
+    for (let i = 0; i < nums.length - 2; i++) {
+        let left = i + 1;
+        let right = nums.length - 1
+
+        while(left < right){
+            let sum = nums[i] + nums[left] + nums[right]
+
+            if(Math.abs(sum - target) < Math.abs(closestSum - target)){
+                closestSum = sum
+            }
+
+            if(sum < target){
+                left ++
+            }else{
+                right --
+            }
+        }
+    }
+
+    return closestSum
+}
+
+console.log(findClosestSum([-1, 2, 1, -4],1));
+
 // Question 4
 // Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
 // Approach: We can perform an binary search to find the target in O(log n) time
@@ -63,37 +100,31 @@ Question 6
 Given a non-empty array of integers nums, every element appears twice except
 for one. Find that single one.
 */
-// Approach: By using Map() we can add and check if a number is already there if there increment its value
-// finally after the loop only single varialbe will have a value of 1. Loop trough the map and return that single values number.
+// Approach: By using XOR bitwise opeartion we can check if a number appears twice or not
+// by XORing with same value it leaves zero or negets the operation an then we finally stay with the single value
+// note: only works if the values form pair like appear two or four times.for anything else we can use Map() which will result in O(n) space complexity
 // Time Complexity: O(n)
 // Space Complexity: O(1)
 
 const findSingleOccuringNumber = nums => {
-    let map = new Map()
-    let single
+    let single = 0
 
     // Check is empty
     if(nums.length === 0) return false
 
     for (let i = 0; i < nums.length; i++) {
-        if(map.has(nums[i])){
-            map.set(nums[i],2) // Its defined that every number appears twice and not more than that
-        }else{
-            map.set(nums[i],1)
-        }
+        single ^= nums[i]
     }
-
-    map.forEach((value,key) => {
-        if(value === 1){
-            single = key
-            return
-        }
-    })
 
     if(single){
         return single
     }else{
-        console.log("ALL NUMBERS APPEARS TWICE");
+    }
+
+    if(single !== 0){
+        return single
+    }else{
+        return "All Numbers Appears Twice"
     }
 }
 
@@ -147,7 +178,7 @@ const findMissingElementRangesMap = (nums,range) => {
 
 console.log(findMissingElementRangesMap([0,1,3,50,75],[0,99]));
 
-// Approach 1: After looking at the code i realized we dont need a map we just have to calculate the
+// Approach 2: After looking at the code i realized we dont need a map we just have to calculate the
 // diffrence directly in the if condition (nums[i] + 1 !== nums[i+1]) after that everything is same
 // Time Complexity: O(n)
 // Space COmplexity: O(1)
