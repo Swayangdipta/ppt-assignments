@@ -100,6 +100,86 @@ const findSingleOccuringNumber = nums => {
 console.log(findSingleOccuringNumber([2,2,4,5,3,5,4]));
 
 /*
+Question 7
+You are given an inclusive range [lower, upper] and a sorted unique integer array
+nums, where all elements are within the inclusive range.
+
+A number x is considered missing if x is in the range [lower, upper] and x is not in
+nums.
+
+Return the shortest sorted list of ranges that exactly covers all the missing
+numbers. That is, no element of nums is included in any of the ranges, and each
+missing number is covered by one of the ranges.
+*/
+// Approach 1: By using Map() we push every element to the map and then check if the differnced element is present
+// in the map or not, if not then we calculate and push the range into the missingELement Array.
+// Time Complexity: O(n)
+// Space Complexity: O(n)
+
+const findMissingElementRangesMap = (nums,range) => {
+    let map = new Map()
+    let missingElements = []
+
+    for (let i = 0; i < nums.length; i++) {
+        map.set(nums[i],i)
+    }
+
+    for (let i = 0; i < nums.length; i++) {
+        if(nums[i] >= range[0] && nums[i] <= range[1]){
+            if(i === 0){
+                if(nums[i] > range[0]){
+                    missingElements.push([nums[i] - range[0],nums[i] - 1])
+                }
+            }else if(i !== nums.length -1){
+                if(!map.has(nums[i + 1] - nums[i])){
+                    missingElements.push([nums[i] + 1,nums[i+1] -1])
+                }
+            }else{
+                if(nums[i] !== range[0]){
+                    missingElements.push([nums[i] + 1,range[1]])
+                }
+            }
+        }    
+    }
+
+    return missingElements
+}
+
+console.log(findMissingElementRangesMap([0,1,3,50,75],[0,99]));
+
+// Approach 1: After looking at the code i realized we dont need a map we just have to calculate the
+// diffrence directly in the if condition (nums[i] + 1 !== nums[i+1]) after that everything is same
+// Time Complexity: O(n)
+// Space COmplexity: O(1)
+
+const findMissingElementRanges = (nums,range) => {
+    let missingElements = []
+
+    for (let i = 0; i < nums.length; i++) {
+        if(nums[i] >= range[0] && nums[i] <= range[1]){
+            if(i === 0){
+                if(nums[i] > range[0]){
+                    missingElements.push([nums[i] - range[0],nums[i] - 1])
+                }
+            }else if(i !== nums.length -1){
+                if(nums[i]+1 !== nums[i+1]){
+                    missingElements.push([nums[i] + 1,nums[i+1] -1])
+                }
+            }else{
+                if(nums[i] !== range[0]){
+                    missingElements.push([nums[i] + 1,range[1]])
+                }
+            }
+        }    
+    }
+
+    return missingElements
+}
+
+console.log(findMissingElementRanges([0,1,3,50,75],[0,99]));
+
+
+/*
 Question 8
 Given an array of meeting time intervals where intervals[i] = [starti, endi],
 determine if a person could attend all meetings.
