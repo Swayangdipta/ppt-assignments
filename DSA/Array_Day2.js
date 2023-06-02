@@ -2,7 +2,7 @@
 Given an integer array nums of 2n integers, group these integers into n pairs (a1, b1), (a2, b2),..., (an, bn) such that the sum of min(ai, bi) for all i is maximized. Return the maximized sum.
 */
 // Approach: First we need to sort the array in accending order then initialize a var maximum_sum to store
-// the sum of minimum elements in each pair. Loop over the array with step to as we are taking elements as pairs of two
+// the sum of minimum elements in each pair. Loop over the array with step 2 as we are taking elements as pairs of two
 // finally return the maximum_sum
 // Time Complexity: O(n log n)
 
