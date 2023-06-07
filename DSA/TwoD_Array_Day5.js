@@ -136,6 +136,40 @@ const getArrayDistance = (arr1,arr2,d) => {
 
 console.log(getArrayDistance([4,5,8],[10,9,1,8],2));
 
+/* Question 6
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears **once** or **twice**, return *an array of all the integers that appears **twice***.
+
+You must write an algorithm that runs in O(n) time and uses only constant extra space.
+*/
+
+// Approach: We first cretae an array countIntegers to count to frequency of the integers,
+// then we iterate over the nums array and we increase the value of the current integers index postion ( value 3 -> index 3)
+// we again iterate over the countIntegrs array to find the elements which has a value of 2, we then push the
+// index directly to the result array as the index represent the value, finally returning the result array.
+
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+
+const findTwiceAppearingIntegers = nums => {
+    const countIntegers = new Array(nums.length + 1).fill(0)
+    const result = []
+
+    for (let i = 0; i < nums.length; i++) {
+        let index = nums[i]
+        countIntegers[index] += 1
+    }
+
+    for (let j = 1; j < countIntegers.length; j++) {
+        if(countIntegers[j] === 2){
+            result.push(j)
+        }
+    }
+
+    return result
+}
+
+console.log(findTwiceAppearingIntegers([4,3,2,7,8,2,3,1]))
+
 /*
 Question 7
 
