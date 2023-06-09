@@ -219,6 +219,9 @@ An integer array original is transformed into a **doubled** array changed by app
 Given an array changed, return original *if* changed *is a **doubled** array. If* changed *is not a **doubled** array, return an empty array. The elements in* original *may be returned in **any** order*.
 */
 
+// Time Complexity: O(n^2)
+// Space COmplexity: O(1)
+
 const findIfChanged = changed => {
     let count = 0
     const original = new Array(Math.floor(changed.length / 2))
