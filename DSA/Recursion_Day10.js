@@ -83,25 +83,6 @@ const calculateLengthOfString = str => {
 
 console.log(calculateLengthOfString("abcd"));
 
-/*Question 5
-We are given a string S, we need to find count of all contiguous substrings starting and ending with same character.
-*/
-
-function printPermutations(str, prefix = '') {
-    if (str.length === 0) {
-      console.log(prefix);
-      return;
-    }
-  
-    for (let i = 0; i < str.length; i++) {
-      const char = str[i];
-      const restOfString = str.slice(0, i) + str.slice(i + 1);
-      printPermutations(restOfString, prefix + char);
-    }
-  }
-  
-  printPermutations('abb');
-
 // Question 6
 // Tower Of Hanoi
 
@@ -118,15 +99,34 @@ function towerOfHanoi(n, source, temporary, destination) {
     const movesBtoC = towerOfHanoi(n - 1, temporary, source, destination);
   
     return movesAtoB + 1 + movesBtoC;
-  }
+}
+
+const n1 = 3;
+const source = 'Rod 1';
+const temporary = 'Rod 2';
+const destination = 'Rod 3';
   
-  const n1 = 3;
-  const source = 'Rod 1';
-  const temporary = 'Rod 2';
-  const destination = 'Rod 3';
+const totalMoves = towerOfHanoi(n1, source, temporary, destination);
+console.log(`Total moves required: ${totalMoves}`);
+
+/*Question 7
+Given a string str, the task is to print all the permutations of str. A permutation is an arrangement of all or part of a set of objects, with regard to the order of the arrangement. For instance, the words ‘bat’ and ‘tab’ represents two distinct permutation (or arrangements) of a similar three letter word.
+*/
+
+function printPermutations(str, prefix = '') {
+    if (str.length === 0) {
+      console.log(prefix);
+      return;
+    }
   
-  const totalMoves = towerOfHanoi(n1, source, temporary, destination);
-  console.log(`Total moves required: ${totalMoves}`);
+    for (let i = 0; i < str.length; i++) {
+      const char = str[i];
+      const restOfString = str.slice(0, i) + str.slice(i + 1);
+      printPermutations(restOfString, prefix + char);
+    }
+}
+  
+printPermutations('abb');
   
 /*Question 8
 Given a string, count total number of consonants in it. A consonant is an English alphabet character that is not vowel (a, e, i, o and u). Examples of constants are b, c, d, f, and g.
