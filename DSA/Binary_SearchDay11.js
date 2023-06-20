@@ -75,6 +75,32 @@ const findPeakElement = nums => {
 
 console.log(findPeakElement([1, 2, 3, 4, 5]));
 
+/* Question 3
+Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array.
+*/
+// TC: O(n log n)
+// SC: O(1)
+const findMissingElement = nums => {
+    nums.sort((a,b) => a - b)
+
+    let left = 0
+    let right = nums.length
+
+    while(left <= right){
+        let mid = Math.floor((left+right) / 2)
+
+        if(nums[mid] === mid){
+            left = mid + 1
+        }else{
+            right = mid - 1
+        }
+    }
+
+    return left
+}
+
+console.log(findMissingElement([3,0,1]));
+
 /*Question 4
 Given an array of integers `nums` containing `n + 1` integers where each integer is in the range `[1, n]` inclusive.
 There is only **one repeated number** in `nums`, return *this repeated number*.
